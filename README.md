@@ -4,6 +4,15 @@
 LifePilot-AI is an AI-powered personal productivity and study assistant built with Python, Google Gemini, and the Model Context Protocol (MCP).
 
 It helps users manage tasks, calculate study time, and receive AI-powered study guidance through an MCP server.
+# LifePilot-AI 🚀
+
+### 🤖 Your Personal AI Productivity Assistant
+
+🌐 **Live Demo:** https://lifepilot-ai-hemanth.streamlit.app
+
+💻 **GitHub Repository:** https://github.com/hemanthmaddula146-sudo/LifePilot-AI
+
+---
 
 ## ✨ Features
 
