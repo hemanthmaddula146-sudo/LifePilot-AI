@@ -1,10 +1,12 @@
 import os
 import sqlite3
+import time
 from datetime import datetime
 from pathlib import Path
 
 from dotenv import load_dotenv
 from google import genai
+from google.genai import types
 from mcp.server.fastmcp import FastMCP
 
 
@@ -350,16 +352,27 @@ def ask_lifepilot_ai(question: str) -> dict:
         }
 
     try:
+        start_time = time.perf_counter()
+        print("LifePilot-AI: Sending request to Gemini...")
+
         response = gemini_client.models.generate_content(
             model=GEMINI_MODEL,
             contents=(
-                "You are LifePilot-AI, a helpful personal productivity "
-                "and study assistant. Give accurate, clear, practical "
-                "answers. Do not claim to have performed actions that "
-                "you have not performed.\n\n"
+                "You are LifePilot-AI, a fast, accurate study and productivity assistant. "
+                "Answer the exact question directly. For simple questions, use a short "
+                "answer with one example when useful. For programming questions, provide "
+                "correct runnable code when requested and explain it briefly. For study plans, "
+                "use clear day-by-day steps. Avoid unnecessary introductions and repetition.\n\n"
                 f"User request: {question.strip()}"
-            )
+            ),
+            config=types.GenerateContentConfig(
+                temperature=0.3,
+                max_output_tokens=512,
+            ),
         )
+
+        elapsed = time.perf_counter() - start_time
+        print(f"LifePilot-AI: Gemini response received in {elapsed:.2f} seconds.")
 
         answer = response.text
 
@@ -377,6 +390,8 @@ def ask_lifepilot_ai(question: str) -> dict:
         }
 
     except Exception as error:
+        elapsed = time.perf_counter() - start_time
+        print(f"LifePilot-AI: Gemini request failed after {elapsed:.2f} seconds.")
         print(f"Gemini request failed: {type(error).__name__}: {error}")
 
         return {
