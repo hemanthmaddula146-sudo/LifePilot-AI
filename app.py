@@ -16,7 +16,7 @@ from google import genai
 from google.genai import types
 
 # LifePilot-AI UI. Keep server.py and lifepilot.db unchanged.
-MCP_SERVER_URL = "http://127.0.0.1:8000/mcp"
+MCP_SERVER_URL = "https://lifepilot-ai-5yvy.onrender.com/mcp"
 APP_NAME = "LifePilot-AI"
 BASE_DIR = Path(__file__).resolve().parent
 GEMINI_MODEL = "gemini-3.1-flash-lite"
