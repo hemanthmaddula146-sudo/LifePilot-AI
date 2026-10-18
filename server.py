@@ -19,8 +19,8 @@ from mcp.server.fastmcp import FastMCP
 BASE_DIR = Path(__file__).resolve().parent
 DATABASE_PATH = BASE_DIR / "lifepilot.db"
 
-HOST = "127.0.0.1"
-PORT = 8000
+HOST = "0.0.0.0"
+PORT = int(os.environ.get("PORT", 8000))
 
 GEMINI_MODEL = "gemini-3.8-flash"
 
